@@ -8,12 +8,23 @@ import Sidebar from "./component/Sidebar"
 import HomePage from './pages/HomePage'
 import Tablee from "./component/Table"
 import Footer from "./component/Footer"
+import { Routes, Route } from "react-router-dom"
+import LoginPage from "./pages/auth/LoginPage"
+import ProfilPage from "./component/ProfilPage"
+
+
+
 
 function App() {
 
   return (
     <>
-    <body className="flex h-screen">
+      <Routes>
+        <Route element={<LoginPage />} path="/" />
+        <Route element={<HomePage />} path="/Homepage" />
+        <Route element={<ProfilPage />} path="/Profile/:username"/>
+      </Routes>
+    {/* <body className="flex h-screen">
         <Sidebar />
         <div className="flex flex-col flex-1">
           <Navbar />
@@ -30,9 +41,9 @@ function App() {
             </footer>
             {/* <CreateProductModal />
             <CreateTransactionModal /> */}
-          </div>
+          {/* </div>
         </div>
-    </body>
+    </body> */}
     </>
   )
 }
