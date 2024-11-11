@@ -11,6 +11,7 @@ import Footer from "./component/Footer"
 import { Routes, Route } from "react-router-dom"
 import LoginPage from "./pages/auth/LoginPage"
 import ProfilPage from "./component/ProfilPage"
+import SignUp from "./pages/auth/SignUp"
 
 
 
@@ -21,6 +22,7 @@ function App() {
     <>
       <Routes>
         <Route element={<LoginPage />} path="/" />
+        <Route element={<SignUp />} path="Sign-Up" />
         <Route element={<HomePage />} path="/Homepage" />
         <Route element={<ProfilPage />} path="/Profile/:username"/>
       </Routes>

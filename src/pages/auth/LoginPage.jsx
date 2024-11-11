@@ -1,27 +1,36 @@
 import { Button, Card, Input, Spacer, } from "@nextui-org/react"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import axios from "axios"
+import { Link, useNavigate } from "react-router-dom"
 
 const LoginPage = () => {
     // State untuk menyimpan email dan password
-    const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+    const navigate = useNavigate()
 
 
     // Fungsi untuk menangani perubahan email
-    const handleEmailChange = () => {
-        setEmail()
+    const handleUserNameChange = (e) => {
+        setUsername(e.target.value)
+
     }
 
     // Fungsi untuk menangani perubahan password
-    const handlePasswordChange = () => {
-        setPassword()
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value)
     }
 
     // Fungsi untuk menangani submit form 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        // cara pertama mendapatkan data form tanpa menggunakan useState
+        // console.log(e.targer[0].value)
+        // console.log(e.target[1].value)
+
+        // cara kedua menggunakan useState
         setIsLoading(true) // Mulai Loading saat tombol submit ditekan
         setErrorMessage("") // Reset pesan error
 
@@ -32,16 +41,12 @@ const LoginPage = () => {
                     "username": username,
                     "password": password,
                 }
-            ).then ((sukses) => {
-                localStorage.setItem('token', sukses.data.data.token)
-                
-            })
-            .catch ((error) =>{
-                setErrorMessage('Login gagal. Cek username atau password Anda.')
-                console.error('Error Login', error)
-            })
-        }finally {
+            )
+            localStorage.setItem('token', response.data.data.token)
+            navigate('/Homepage')
+        }catch (error) {
             setIsLoading(false) // Matikan Loading saat permintaan selesai
+            setErrorMessage('Login gagal. Cek username atau password Anda.')
         }
     };
 
@@ -53,11 +58,11 @@ const LoginPage = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <Input
-                         label="email"
+                         label="Username"
                          fullWidth
-                         value={email}
-                         onChange={handleEmailChange}
-                         type="email"
+                         value={username}
+                         onChange={handleUserNameChange}
+                         type="text"
                          required
                          placeholder="Enter your email / username" />
                     </div>
@@ -80,6 +85,7 @@ const LoginPage = () => {
                      className="mt-4">
                         {isLoading ? 'Logging In ...': 'Masuk'}
                         </Button>
+                        <h4>Belum punya akun? <Link to="/Sign-Up" className="text-blue-500">Daftar</Link></h4>
                 </form>
             </Card>
         </div>
@@ -92,7 +98,6 @@ const LoginPage = () => {
         //         <Input label="Password" className="mb-6" />
         //         <Button>Login</Button>
         //         <Spacer y={1} />
-        //         <h4>Belum punya akun? <Link to="/Sign-Up" className="text-blue-500">Daftar</Link></h4>
         //     </Card>
         // </div>
     )
