@@ -71,7 +71,7 @@ const SignUp = () => {
                 }
             )
             localStorage.setItem('id', response.data.data.id)
-            console.log(handleSubmit)
+            alert('Silahkan Login')
             navigate('/')
         }catch (error) {
             setIsLoading(false)

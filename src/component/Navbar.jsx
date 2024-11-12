@@ -8,7 +8,7 @@ const Navbar = () => {
         <a href="#" className="hover:text-gray-300">About</a>
         <a href="#" className="hover:text-gray-300">Profile</a>
       </div>
-      <Avatar />
+      <Avatar className="mr-8" />
     </div>
   );
 };

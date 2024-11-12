@@ -1,17 +1,17 @@
-import { Table } from "@nextui-org/react"
-import Loader from "./component/Loader"
-import CreateCustomer from "./component/modals/CreateCustomerModal"
-import CreateProductModal from './component/modals/CreateProductModal'
-import CreateTransactionModal from "./component/modals/CreateTransactionModal"
-import Navbar from "./component/Navbar"
-import Sidebar from "./component/Sidebar"
-import HomePage from './pages/HomePage'
-import Tablee from "./component/Table"
-import Footer from "./component/Footer"
+// import { Table } from "@nextui-org/react"
+// import Loader from "./component/Loader"
+// import CreateCustomer from "./component/modals/CreateCustomerModal"
+// import CreateProductModal from './component/modals/CreateProductModal'
+// import CreateTransactionModal from "./component/modals/CreateTransactionModal"
+// import Navbar from "./component/Navbar"
+// import Sidebar from "./component/Sidebar"
+// import Tablee from "./component/Table"
+// import Footer from "./component/Footer"
 import { Routes, Route } from "react-router-dom"
 import LoginPage from "./pages/auth/LoginPage"
 import ProfilPage from "./component/ProfilPage"
 import SignUp from "./pages/auth/SignUp"
+import Dashboard from "./pages/Dashboard"
 
 
 
@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route element={<LoginPage />} path="/" />
         <Route element={<SignUp />} path="Sign-Up" />
-        <Route element={<HomePage />} path="/Homepage" />
+        <Route element={<Dashboard />} path="/Dashboard" />
         <Route element={<ProfilPage />} path="/Profile/:username"/>
       </Routes>
     {/* <body className="flex h-screen">

@@ -43,7 +43,7 @@ const LoginPage = () => {
                 }
             )
             localStorage.setItem('token', response.data.data.token)
-            navigate('/Homepage')
+            navigate('/Dashboard')
         }catch (error) {
             setIsLoading(false) // Matikan Loading saat permintaan selesai
             setErrorMessage('Login gagal. Cek username atau password Anda.')
