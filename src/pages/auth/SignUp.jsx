@@ -1,8 +1,180 @@
+// import { Button, Card, CardBody, CardHeader, Divider, Input } from "@nextui-org/react";
+// import React, { useEffect } from "react";
+// import { toast } from 'sonner'
+// import { Controller, useForm } from "react-hook-form";
+// import { z } from "zod";
+// import { zodResolver } from '@hookform/resolvers/zod'
+// import { axiosInstance } from "../../lib/axios";
+// import { useNavigate } from 'react-router-dom'
+
+
+
+// const signUpFormschema = z.object({
+//     email: z.string().email("Format email belum sesuai"),
+//     // username: z.string().regex(/^[0-9.+$/], "Username harus 4 karakter atau lebih"),
+//     password: z.string().min(8, "Password harus lebih dari 8 karakter"),
+//     nama: z.string().min(5, "Nama Harus Lebih dari 5 karakter ")
+// })
+
+
+
+
+// const SignUp = () => {
+//     const navigate = useNavigate()
+//     // handle inputan atau form
+//     const form = useForm({
+//         defaultValues: {
+//             name: "",
+//             email: "",
+//             username: "",
+//             password: "",
+//         },
+//         resolver: zodResolver(signUpFormschema),
+//     })
+
+// const registerUser = async (data) => {
+//     try {
+//         const userData = { ...data, role: "employee" }
+//         const response = await axiosInstance.post("/auth/register", userData)
+//         toast.success("Register Berhasil")
+//         if (response.status === 201) {
+//             setTimeout(() => {
+//                 navigate("/")
+//             }, 1000)
+//         }
+//         console.log(registerUser)
+//     } catch (error) {
+//         toast.error("Register Failed")
+//         console.log(registerUser)
+//     }
+// }
+
+    
+
+//     // zod untuk memvalidasi form
+//     return (
+//         <div className="flex h-screen items-center justify-center">
+//             <Card className="w-[300px]">
+//                 <CardHeader className="font-bold text-lg">Sign Up</CardHeader>
+//                 <Divider />
+//                 <CardBody>
+//                     <form onSubmit={form.handleSubmit(registerUser)} className="flex flex-col gap-4">
+                    
+//                     <Controller
+//                     //Properties
+//                      name="name"
+//                     // Props control untuk mengendalikan form
+//                      control={form.control}
+//                     // Prop untuk menampilkan ui
+//                      render={({field, fieldState}) => {
+//                         return (
+//                             <Input {...field}
+//                             label="Nama"
+//                             size="sm"
+//                             isInvalid={Boolean(fieldState.error)}
+//                             errorMessage={fieldState.error?.message}
+//                              />
+//                         )  
+//                      }}/>
+
+//                     <Controller
+//                     //Properties 
+//                      name="email"
+//                     // Props control untuk mengendalikan form
+//                      control={form.control}
+//                     // Prop untuk menampilkan ui
+//                      render={({ field, fieldState }) => {
+//                         return (
+//                         <Input {...field}
+//                         type="email"
+//                         label="Email"
+//                         size="sm"
+//                         isInvalid={Boolean(fieldState.error)}
+//                         errorMessage={fieldState.error?.message}
+//                          />
+//                         )
+//                      }}/>
+
+//                     <Controller
+//                     //Properties
+//                      name="username"
+//                     // Props control untuk mengendalikan form
+//                      control={form.control}
+//                     // Prop untuk menampilkan ui
+//                      render={({field, fieldState}) => {
+//                         return (
+//                             <Input {...field}
+//                             label="Username"
+//                             size="sm" 
+//                             isInvalid={Boolean(fieldState.error)}
+//                             errorMessage={fieldState.error?.message}
+//                              />
+//                         )
+//                      }}/>
+
+//                     <Controller
+//                     //Properties
+//                      name="password"
+//                     // Props control untuk mengendalikan form
+//                      control={form.control}
+//                     // Prop untuk menampilkan ui
+//                      render={({field, fieldState}) => {
+//                         return (
+//                             <Input {...field}
+//                             type="password"
+//                             label="Password"
+//                             size="sm"
+//                             isInvalid={Boolean(fieldState.error)}
+//                             errorMessage={fieldState.error?.message}
+//                              />
+//                         )  
+//                      }}/>
+
+//                     <Button type="submit" color="primary">
+//                         Sign Up
+//                     </Button>
+//                     </form>
+//                 </CardBody>
+//             </Card>
+//         </div>
+//     )
+// }
+
+
+// export default SignUp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { Card, Input, Button, Select, SelectItem } from "@nextui-org/react";
 import { useState } from "react";
 import axios from "axios"
 import { Link, useNavigate } from "react-router-dom"
-import { label } from "framer-motion/client";
+import { toast } from "sonner";
 
 
 
@@ -14,7 +186,6 @@ const SignUp = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [role, setRole] = useState("")
-    const [errorMessage, setErrorMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
     
@@ -71,11 +242,11 @@ const SignUp = () => {
                 }
             )
             localStorage.setItem('id', response.data.data.id)
-            alert('Silahkan Login')
             navigate('/')
+            toast.success("Registrasi Berhasil")
         }catch (error) {
             setIsLoading(false)
-            setErrorMessage('Daftar gagal')
+            toast.error('Daftar gagal')
         }
 
     }

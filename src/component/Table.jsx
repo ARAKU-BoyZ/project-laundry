@@ -1,6 +1,21 @@
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
+import { axiosInstance } from "../lib/axios";
+import { useEffect, useState } from "react";
 
 const Tablee = () => {
+  const [listCustomer, setListCustomer] = useState()
+
+  const fetchCustomer = async () => {
+    const response = await axiosInstance.get('api/v1/customers')
+
+    setListCustomer(response.data)
+  }
+
+  useEffect(() => {
+    fetchCustomer()
+  }, [])
+
+
   return (
     <Table>
       <TableHeader>
@@ -9,6 +24,9 @@ const Tablee = () => {
         <TableColumn>Tabel Transaksi</TableColumn>
       </TableHeader>
       <TableBody>
+        {listCustomer.map((item) => {
+          return <TableCell>{item.name}</TableCell>
+        })}
         <TableRow>
           <TableCell>Tony Reichert</TableCell>
           <TableCell>CEO</TableCell>
