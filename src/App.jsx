@@ -5,6 +5,7 @@ import ProfilPage from "./component/ProfilPage"
 import SignUp from "./pages/auth/SignUp"
 import Dashboard from "./pages/Dashboard"
 import WishListPage from "./pages/WishListPage"
+import { Provider } from "react-redux"
 
 
 
